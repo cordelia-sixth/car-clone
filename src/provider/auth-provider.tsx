@@ -1,7 +1,7 @@
 // このコンポーネントで状態を管理するのでclient componentにする
 'use client';
 
-import { fireAuth } from '@/lib/firebase'; // 自分のfirebase設定ファイルをimport
+import { auth } from '@/lib/firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { createContext, useContext, useEffect, useState } from 'react';
 
@@ -26,7 +26,7 @@ export function FireAuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // リッスン開始
-    const unsubscribe = onAuthStateChanged(fireAuth, (firebaseUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
       setLoading(false);
     });
